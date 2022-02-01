@@ -1,0 +1,21 @@
+html,body{
+	height: 100%;
+}
+
+
+#conteudos{
+	height: 84%;
+}
+
+#perfil{
+	height: 60px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#aside-conteudo{
+	width: 20%;
+}
+
+#conteudo-principal{
+	width:80%;
+}

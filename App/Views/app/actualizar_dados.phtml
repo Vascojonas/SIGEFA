@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Administrador</title>
+	 
+	 <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+	 <link rel="stylesheet"  href="css/estilo.css">
+
+</head>
+<body >
+
+	<div class="container-fluid h-100"><!--Inicio conteiner-->
+		<div class="row h-100">
+
+			<nav class="col-12 d-flex bg-primary py-2 pl-2 text-dark" >
+				<a href="#"class="h4 navbar-brand">SIGEFA</a>	
+				
+			</nav>
+
+			<div id="conteudos" class="w-100 d-flex"><!--Inicio conteudos-->
+				<aside id="aside-conteudo" class="aside bg-dark"><!--Inicio Navegacao Lateral-->
+					<div id="perfil" class="text-light">
+						<img class="text-primary" src="icons/person-circle.svg" width="60px" height="60px">
+						<a href="#">
+							<?= $_SESSION['nome']?>
+						</a>
+					</div>
+					<nav class="navbar p-0" >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao1-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/registrar_leitura">Registrar Leitura</a> 
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary  nav-link mb-2" href="/efectuar_pagamento">Efectuar Pagamento</a> 
+							</li>
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary  nav-link mb-2" href="/abrir_contrato">Abrir Contracto</a>
+							</li>
+						</ul>
+					</nav><!--Fim Navegacao1-->
+					<div class="btn d-block disabled bg-info my-3">
+						Gestão de Clientes
+					</div>
+					<nav class="navbar p-0 " >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao2-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link  mb-2" href="/cadastrar_cliente">Cadastrar Clientes</a>
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary active nav-link mb-2" href="/actualizar_dados">Actualizar dados</a>
+							</li>
+
+							<a class="btn btn-block btn-danger my-2" href="/sair">Sair</a>
+					</nav><!--Fim Navegacao2-->
+
+					
+					
+					
+				</aside><!--Fim navegacao-lateral-->
+
+				<div id="conteudo-principal" class="h-100"><!--Inicio conteudos-Principal-->
+					 <h1>Actualizar Dados</h1>
+					 <hr>
+					 
+					 <div>
+					 	<form form-control-sm action="/pesquisar_clienteal" method="post">
+						<div class="input-group">
+           				    <input name="pesquisar" class="col-6" type="text" placeholder="Pesquisar por username, nome ou codigo do cliente ">
+         				    <div class="input-group-append">
+         				    <button class="input-group-text bg-primary">Pesquisar</button>
+             			  	</div>  
+       					</div> 
+					</form>
+
+					 <table class="table table-striped ">
+
+
+
+										<table class="table table-striped">
+
+										<thead class="">
+											<th>Nome</th>
+											<th>Apelido</th>
+											<th>Cidade</th>
+											<th>Sexo</th>
+											<th></th>
+										</thead>
+
+
+									<?php 
+										if(isset($this->view->clientes)){
+
+											 foreach ($this->view->clientes as $i=>$cliente) {?>
+
+												<tbody>
+													<td><?=$cliente['cliente_nome']?></td>
+													<td><?=$cliente['cliente_apelido']?></td>
+													<td><?=$cliente['cliente_cidade']?></td>
+													<td><?=$cliente['cliente_sexo']?></td>
+													<td>
+													<form action="/registrar_contrato" method="post"><form class="d-inline-block btn-group my-0 ">
+													<input class="" name='id_usuario' type="hidden">
+													<button class="btn btn-primary btn-sm " type="submit">Editar</button>
+
+													<input class="" name='id_usuario' type="hidden">
+													<button class="btn btn-danger btn-sm" type="submit">Desabilitar</button>
+
+													<input class="" name='id_usuario' type="hidden">
+													<button class="btn btn-info btn-sm" type="submit">Ver contrato</button>
+												</form>	
+													</form>
+								
+													</td>
+												</tbody>
+										
+									<?php }
+										}
+									?>
+
+							</table>
+												
+										
+										</tbody>
+										
+							</table>
+					 </div>
+						
+				</div><!--Fim conteudos-Principal-->
+			</div><!--Fim conteudos-->
+		<footer class="bg-primary text-dark p-3 col-12  clearfix ">
+				<span class="float-left">copyright @2021-Todos os direitos reservados</span>
+				<span class="float-right ml-5"> version 1.0</span>
+			</footer>		
+			
+			
+		</div>
+	</div>	<!--Inicio conteiner-->	
+
+</body>
+</html>

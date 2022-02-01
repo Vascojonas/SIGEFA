@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Administrador</title>
+	 
+	 <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+	 <link rel="stylesheet"  href="css/estilo.css">
+
+</head>
+<body >
+
+	<div class="container-fluid h-100"><!--Inicio conteiner-->
+		<div class="row h-100">
+
+			<nav class="col-12 d-flex bg-primary py-2 pl-2 text-dark" >
+				<a href="#"class="h4 navbar-brand">SIGEFA</a>	
+			</nav>
+
+			<div id="conteudos" class="w-100 d-flex"><!--Inicio conteudos-->
+				<aside id="aside-conteudo" class="aside bg-dark"><!--Inicio Navegacao Lateral-->
+					<div id="perfil" class="text-light">
+						<img class="text-primary" src="icons/person-circle.svg" width="60px" height="60px">
+						<a href="#">
+							<?= $_SESSION['nome']?>
+						</a>
+					</div>
+					<nav class="navbar p-0" >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao1-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/registrar_leitura">Registrar Leitura</a> 
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary  nav-link mb-2" href="/efectuar_pagamento">Efectuar Pagamento</a> 
+							</li>
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary  nav-link mb-2" href="/abrir_contrato">Abrir Contracto</a>
+							</li>
+						</ul>
+					</nav><!--Fim Navegacao1-->
+					<div class="btn d-block disabled bg-info my-3">
+						Gestão de Clientes
+					</div>
+					<nav class="navbar p-0 " >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao2-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link active mb-2" href="/cadastrar_cliente">Cadastrar Clientes</a>
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/actualizar_dados">Actualizar dados</a>
+							</li>
+
+							<a class="btn btn-block btn-danger my-2" href="/sair">Sair</a>
+					</nav><!--Fim Navegacao2-->
+
+					
+					
+					
+				</aside><!--Fim navegacao-lateral-->
+
+				<div id="conteudo-principal" class="h-100"><!--Inicio conteudos-Principal-->
+					 <h1>Cadastrar Cliente</h1>
+				
+					  <hr>
+
+					 <form action="/inserir_cliente" method="post">
+
+					 	<?php if (isset($this->view->dadosInvalidos)) {
+					 		if ($this->view->dadosInvalidos) {?>
+       							<small class="text-form text-danger">Preencha os campos correctamente
+       							</small>       						
+       						<?php } }?>
+
+       						<?php if (isset($this->view->sucessoCadastro)) {
+					 		if ($this->view->sucessoCadastro) {?>
+       							<small class="text-form text-success h4 col-6 offset-6">Cliente cadastrado com sucesso
+       							</small>       						
+       						<?php } }?>
+
+					 	<div class="form-group form-inline">
+
+					 		<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Nome</span>
+					           </div>
+           					<input name="nome" value="<?=$this->view->cliente['nome']?>"class="form-control" type="text" placeholder="Digite o seu nome">
+       						</div> 
+
+       						<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Apelido</span>
+					           </div>
+           					<input name="apelido"value="<?=$this->view->cliente['apelido']?>" class="form-control" type="text" placeholder="Digite o seu apelido">
+       						</div>
+					        
+				        </div>
+
+				        <div class="form-group form-inline">
+				        	<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Cidade</span>
+					           </div>
+           					<input name="cidade" value="<?=$this->view->cliente['cidade']?>" class="form-control" type="text" placeholder="Digite cidade">
+       						</div>
+
+					 		<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Bairro</span>
+					           </div>
+           					<input name="bairro" value="<?=$this->view->cliente
+           					['bairro']?>"class="form-control" type="text" placeholder="Digite o bairro">
+       						</div> 
+					        
+				        </div>
+
+				        <div class="form-group form-inline">
+				        	<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Quarteirão</span>
+					           </div>
+           					<input name="quarteirao"value="<?=$this->view->cliente['quarteirao']?>" class="form-control" type="number" placeholder="Digite quarteirão">
+       						</div>
+       						
+       						<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Casa</span>
+					           </div>
+           					<input name="casa" value="<?=$this->view->cliente['casa']?>" class="form-control" type="number" placeholder="Digite o número da casa">
+       						</div>
+				        </div>
+
+				        <div class="form-group form-inline">
+
+					 		<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Nacionalidade</span>
+					           </div>
+           					<input name="nacionalidade" value="<?=$this->view->cliente['nacionalidade']?>" class="form-control" type="text" placeholder="Digite sua nacionalidade">
+       						</div> 
+
+       						<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">NUIT</span>
+					           </div>
+           					<input name="nuit" value="<?=$this->view->cliente['nuit']?>" class="form-control" type="number" placeholder="Digite número de nuit">
+       						</div>
+       						
+					        
+				        </div>
+
+				         <div class="form-group form-inline">
+
+					 		<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Username</span>
+					           </div>
+           					<input name="username" value="<?=$this->view->cliente['username']?>" class="form-control" type="text" placeholder="Digite seu username">
+           					
+       						</div> 
+       						
+
+       						<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Senha</span>
+					           </div>
+           					<input name="senha"value="<?=$this->view->cliente['senha']?>" class="form-control" type="password" placeholder="Digite sua senha">
+       						</div>
+
+       						<?php if (isset($this->view->userExist)) {
+       							if($this->view->userExist){?>
+       							
+       								<small class="text-form text-danger">Este username já existe
+       								</small>  
+       							
+       							     						
+       						<?php }}?>
+       						
+       						
+					        
+				        </div>
+
+				        <div class="form-group form-inline">
+
+					 		<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Telefone1</span>
+					           </div>
+           					<input name="tel1" value="<?=$this->view->agente['tel1']?>"class="form-control" type="number" placeholder="Numero de telefone">
+       						</div> 
+
+       						<div class="input-group w-50">
+					           <div class="input-group-prepend">
+					               <span class="input-group-text bg-info">Telefone2</span>
+					           </div>
+           					<input name="tel2" value="<?=$this->view->agente['tel2']?>" class="form-control" type="number" placeholder="Numero de telefone">
+       						</div>
+
+       						 <div class="form-group input-group mt-2 col-12">
+					       				
+					 			<div class="form-inline col-12">
+					 				<div>
+					 					<span class="h6 mr-2" for="sexo">Sexo</span>
+							       		<input type="radio" id="sexo" name="sexo" value="M"> <span class="mr-2">Masculino</span>
+					 				</div>
+				       				
+							       		<input type="radio" id="sexo" name="sexo" value="F"> <span class="mr-2">Femenino</span>
+					       				</div>
+					       		</div><br>
+
+				        <input  class="btn  btn-primary col-4 offset-8 mb-3 " type="submit" value="Cadastrar">
+       						
+					        
+				        </div>
+
+				       
+   					 </form>
+					
+					
+					 
+
+				</div><!--Fim conteudos-Principal-->
+			</div><!--Fim conteudos-->
+		<footer class="bg-primary text-dark p-3 col-12 clearfix ">
+				<span class="float-left">copyright @2021-Todos os direitos reservados</span>
+				<span class="float-right ml-5"> version 1.0</span>
+			</footer>		
+			
+			
+		</div>
+	</div>	<!--Inicio conteiner-->	
+
+</body>
+</html>

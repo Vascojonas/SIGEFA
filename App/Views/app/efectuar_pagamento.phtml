@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Administrador</title>
+	 
+	 <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
+	 <link rel="stylesheet"  href="css/estilo.css">
+
+</head>
+<body >
+
+	<div class="container-fluid"><!--Inicio conteiner-->
+		<div class="row ">
+
+			<nav class="col-12 d-flex bg-primary py-2 pl-2 text-dark" >
+				<a href="#"class="h4 navbar-brand">SIGEFA</a>	
+			</nav>
+
+			<div id="conteudos" class="w-100 d-flex"><!--Inicio conteudos-->
+				<aside id="aside-conteudo" class="aside bg-dark"><!--Inicio Navegacao Lateral-->
+					<div id="perfil" class="text-light">
+						<img class="text-primary" src="icons/person-circle.svg" width="60px" height="60px">
+						<a href="#">
+							
+						</a>
+					</div>
+					<nav class="navbar p-0" >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao1-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/registrar_leitura">Registrar Leitura</a> 
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary active nav-link mb-2" href="/efectuar_pagamento">Efectuar Pagamento</a> 
+							</li>
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/abrir_contrato">Abrir Contracto</a>
+							</li>
+						</ul>
+					</nav><!--Fim Navegacao1-->
+					<div class="btn d-block disabled bg-info my-3">
+						Gestão de Clientes
+					</div>
+					<nav class="navbar p-0 " >
+						<ul class="navbar-nav w-100 flex-column "><!--Inicio Navegacao2-->
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/cadastrar_cliente">Cadastrar Clientes</a>
+							</li> 
+							<li class="nav-item">
+								<a class="btn btn-block btn-primary nav-link mb-2" href="/actualizar_dados">Actualizar dados</a>
+							</li>
+
+							<a class="btn btn-block btn-danger my-2" href="/sair">Sair</a>
+					</nav><!--Fim Navegacao2-->
+
+					
+					
+					
+				</aside><!--Fim navegacao-lateral-->
+
+				<div id="conteudo-principal" class="h-100"><!--Inicio conteudos-Principal-->
+					 <h1>Efectuar pagamento</h1>
+					 <hr>
+					 <div class="d-flex"> <!---______________________-->
+						<div id="lateral_equerdo" class="col-8"> <!--Inicio conteudos-lateral esquerdo-->
+							 <div class="">
+								<form action="buscar_cliente" method="post" >
+									<div class="d-flex  col-12">
+										<input class="form-control" type="text" name="pesquisa" placeholder="Número do contador, codigo do cliente ou nome">
+										<button class="btn btn-primary"  type="submit" >Pesquisar</button>
+									</div>
+								</form>
+							</div>
+							
+						
+								<div class="">
+									<h4>Dados do cliente</h4>
+									<table class="table table-striped">
+
+										<thead class="">
+											<th>Nome</th>
+											<th>Apelido</th>
+											<th>Cidade</th>
+											<th>Sexo</th>
+											<th>Selecionar</th>
+										</thead>
+
+
+									<?php 
+										if(isset($this->view->resultado)){
+
+											 foreach ($this->view->resultado as $i=>$cliente) {?>
+
+												<tbody>
+													<td><?=$cliente['cliente_nome']?></td>
+													<td><?=$cliente['cliente_apelido']?></td>
+													<td><?=$cliente['cliente_cidade']?></td>
+													<td><?=$cliente['cliente_sexo']?></td>
+													<td>
+													<form action="/registrar_contrato" method="post">
+										  			  <input type="checkbox" name="cliente" value="<?=$cliente['cliente_cod']?>"/>	
+													</form>
+								
+													</td>
+												</tbody>
+										
+									<?php }
+										}
+									?>
+
+							</table>
+								</div>
+							
+
+							
+								<h4>Selecione as facturas por pagar</h4>
+
+								<form form-control-sm>
+									<div id="facturas_listas">
+											<table class="table table-striped">
+
+												<thead class="">
+											<th>Data</th>
+											<th>valor</th>
+											<th>valor liquidado</th>
+											<th>valor em debito</th>
+											<th>Selecionar</th>
+
+										</thead>
+
+											
+												<?php 
+											if(isset($this->view->facturas)){
+
+											 foreach ($this->view->facturas as $i=>$facura) 
+											 	{?>
+											 		<tbody>
+													
+													<td><?=$facura['leitura_data']?></td>
+													<td><?=$facura['factura_valor']?></td>
+													<td><?=$facura['factura_valor_liquidado']?></td>
+													<td><?=$facura['facura_valor_debito']?></td>
+													
+													<td>
+										  			  <input type="checkbox" name="factura" value="<?=$facura['cod_leitura']?>">
+													</td>
+
+													
+												</tbody>
+												
+												
+											<?php }
+												}
+											?>
+											</table>
+									  </div>
+									 </form>	
+			
+						</div><!--Fim conteudos-lateral esquerdo-->
+						
+						<div id="lateral_direito" class="col-4 mt-5"><!--Inicio conteudos-lateral Direito-->
+						<h4 class="mt-4">Operaões do pagamento</h4>	
+						<div class="mt-5">
+							<div class="form-group form-inline col-12">
+
+								 	<div class="input-group">
+								           <div class="input-group-prepend">
+								               <span class="input-group-text bg-info">Valor total</span>
+								           </div>
+			           					<input name="bairro" value=""class="form-control" type="text" placeholder="" readonly>
+			       						</div> 
+					       			</div>
+
+					       			<div class="form-group form-inline col-12">
+
+								 		<div class="input-group">
+								           <div class="input-group-prepend">
+								               <span class="input-group-text bg-info">Valor pago</span>
+								           </div>
+			           					<input name="bairro" value=""class="form-control" type="text" placeholder="Digite o valor">
+			       						</div> 
+					       			</div>
+
+					       			<div class="form-group form-inline col-12">
+
+								 		<div class="input-group">
+								           <div class="input-group-prepend">
+								               <span class="input-group-text bg-info">Trocos</span>
+								           </div>
+			           					<input name="bairro" value=""class="form-control" type="text" placeholder="Visualizar trocos">
+			       						</div> 
+
+			       						
+					       			</div>
+
+
+					       			<div class="form-group form-inline col-12">
+
+								 		<input  class="btn  btn-primary col-12" type="submit" value="Registrar pagamento">
+					       			</div>
+
+					       		
+						</div>
+						
+
+							
+						</div><!--Fim conteudos-lateral Direito-->
+					 </div>  <!---______________________-->
+				</div><!--Fim conteudos-Principal-->
+			</div><!--Fim conteudos-->
+			<footer class="bg-primary text-dark p-3 col-12 clearfix ">
+				<span class="float-left">copyright @2021-Todos os direitos reservados</span>
+				<span class="float-right ml-5"> version 1.0</span>
+			</footer>		
+			
+			
+		</div>
+	</div>	<!--Inicio conteiner-->	
+
+</body>
+</html>
